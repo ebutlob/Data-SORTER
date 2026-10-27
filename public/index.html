@@ -1,0 +1,82 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Data Sorter</title>
+<link rel="stylesheet" href="styles.css">
+</head>
+<body>
+
+<header class="topbar">
+  <div class="brand">
+    <span class="dot"></span>
+    <h1>Data Sorter</h1>
+  </div>
+  <span class="tag">pipe &rarr; structured &rarr; copyable</span>
+</header>
+
+<main>
+
+  <section class="panel input-panel">
+    <div class="panel-head">
+      <label for="input">Paste raw records</label>
+      <span id="lineCount" class="hint">0 lines</span>
+    </div>
+    <textarea id="input" spellcheck="false" placeholder="5409789528843844|05|27|504|أحمد القحطاني|جازان حي الملك سعود شارع الملك سلمان 389|جازان|SOUTH|99151|AE|+971 971 3406 2407|أحمدالقحطاني@yahoo.fr|| ||LIVE|85 No reason to decline|T0CHECK.CO"></textarea>
+    <div class="row-buttons">
+      <button id="parseBtn" class="primary">Parse</button>
+      <button id="sampleBtn">Load sample</button>
+      <button id="clearBtn" class="ghost">Clear</button>
+      <span class="spacer"></span>
+      <span class="hint">Ctrl / ⌘ + Enter to parse</span>
+    </div>
+  </section>
+
+  <section id="statsBar" class="stats hidden">
+    <div class="stat"><span class="num" id="sTotal">0</span><span class="lbl">records</span></div>
+    <div class="stat live"><span class="num" id="sLive">0</span><span class="lbl">live</span></div>
+    <div class="stat dead"><span class="num" id="sDead">0</span><span class="lbl">dead</span></div>
+    <div class="stat"><span class="num" id="sLuhn">0</span><span class="lbl">luhn valid</span></div>
+    <div class="stat"><span class="num" id="sSkipped">0</span><span class="lbl">skipped</span></div>
+  </section>
+
+  <section id="toolbar" class="toolbar hidden">
+    <input id="search" type="search" placeholder="Search name, email, city, card…">
+    <select id="statusFilter">
+      <option value="ALL">All statuses</option>
+      <option value="LIVE">LIVE</option>
+      <option value="DEAD">DEAD</option>
+      <option value="UNKNOWN">UNKNOWN</option>
+    </select>
+    <select id="sortBy">
+      <option value="none">Original order</option>
+      <option value="name">Name A→Z</option>
+      <option value="expiry">Expiry</option>
+      <option value="country">Country</option>
+      <option value="status">Status</option>
+      <option value="luhn">Luhn valid first</option>
+    </select>
+    <button id="maskBtn" class="toggle">Mask numbers</button>
+    <span class="spacer"></span>
+    <button data-export="txt">Copy TXT</button>
+    <button data-export="csv">Copy CSV</button>
+    <button data-export="json">Copy JSON</button>
+    <button data-export="tsv">Copy TSV</button>
+    <button id="downloadBtn" class="primary">Download CSV</button>
+  </section>
+
+  <section id="results" class="grid"></section>
+
+  <section id="empty" class="empty">
+    <p>No records yet.</p>
+    <p class="hint">Paste your pipe-delimited data above and hit Parse.</p>
+  </section>
+
+</main>
+
+<div id="toast" class="toast"></div>
+
+<script src="app.js"></script>
+</body>
+</html>
